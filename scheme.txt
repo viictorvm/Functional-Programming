@@ -1,0 +1,156 @@
+(define lengthLetrec
+  (lambda(list)
+    (letrec((lengthT0
+             (lambda(n acc)
+               (if(null? n)
+                  acc
+                  (lengthT0(cdr n)(+ 1 acc))
+                  )
+               )
+             ))
+      (lengthT0 list 0))
+    ))   length of a list using letrec
+
+(define lengthLet
+  (lambda(list)
+    (let lengthLet((n list)(acc 0))
+      (if(null? n)
+         acc
+         (lengthLet (cdr n) (+ 1 acc))
+         )
+      ))
+  )
+
+(define intersectionLetrec
+  (lambda(list1 list2)
+    (letrec((intersection
+             (lambda(n1 n2 list3)
+               (if(null? n1)
+                  list3
+                  (if(member (car n1) n2)
+                     (intersection(cdr n1) n2 (cons (car n1) list3))
+                     (intersection(cdr n1) n2 list3)
+                     )
+                  )))
+            )
+            (intersection list1 list2 '())
+      )
+    )
+  )
+
+(define intersectionLet
+  (lambda(list1 list2)
+    (let intersectionLet((n1 list1)(n2 list2)(list3 '()))
+      (if(null? n1)
+         list3
+         (if(member (car n1) n2)
+            (intersectionLet(cdr n1) n2 (cons(car n1) list3))
+            (intersectionLet(cdr n1) n2 list3)
+         )
+      ))
+  )
+)
+
+(define compareLists
+  (lambda(list1 list2)
+    (letrec ((compare
+              (lambda (n1 n2 list3)
+                 (if (null? n1)
+                     list3
+                     (if( = (car n1)(car n2))
+                        (cons 1 (compare (cdr n1) (cdr n2) list3))
+                        (cons 0 (compare (cdr n1) (cdr n2) list3))
+                        )
+                     )
+                 ))
+              )
+      (compare list1 list2 '())
+    )
+    )
+  )
+
+
+                          
+; Factorial Stack:
+
+(define factN 
+   (lambda ( n)
+      (if (= n 0)
+      1 
+      (* n (factN (- n 1)))
+       )
+    )
+)                        
+
+;Factorial Tail
+
+(define factN 
+   (lambda (n acc)
+      (if (= n 0)
+      acc 
+      (factN (- n 1) (* acc n))
+       )
+    )
+)                   
+
+; POW Stack:
+
+(define pow1
+  (lambda(x y)
+    (letrec((pow0
+             (lambda(n1 n2 acc)
+               (if(= n2 0)
+                  acc
+               (pow0 n1 (- n2 1) (* n1 acc ))
+               )
+              )
+           ))
+      (pow0 x y 1)
+      )
+    ))   
+
+;Pow Tail:
+
+(define pow2
+  (lambda (x y)
+    (let pow0((n1 x) (n2 y) (acc 1))
+      (if(= n2 0)
+         acc
+         (pow0 n1 (- n2 1) (* n1 acc))
+         )
+      )
+    )
+  )           
+
+;Fibonacci
+(define fibS (lambda (n )
+  (if(<= n 2)
+     1
+  (+ (fibS(- n 1)) (fibS(- n 2))))))
+ 
+ ;Fibonacci
+(define fibT(lambda (ac acc n)
+  (if(= n 0)
+     acc
+     (fibT( + ac acc) ac (- n 1)))))
+
+
+;Sum elements of a list (stack)
+(define sumS (lambda (ls)
+      (if(null? ls)
+              0
+      (+ (car ls) (sumS (cdr ls))))))
+
+;  same but recursive
+(define sumT (lambda (ls acc)
+      (if(null? ls)
+              acc
+      (sumT(cdr ls)(+ acc (car ls))))))
+
+
+
+How to run each function:
+>(FunctionName values)
+
+Eg: >(sumT '(1 2 3 4))
+    > (compareLists '(1 2 5 ) '(1 2 4))
