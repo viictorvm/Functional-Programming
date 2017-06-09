@@ -59,12 +59,8 @@ f4s [] x = False
 f4s(n:ns) x = if n == x then True else f4s(ns) x
 
 
--- List comprehesion
 
-ex3l :: Int -> [Int]
-ex3l n = [x|x<-[2..n], ex2r x (x-1)]
-
--- 4) Verify if the sum of digits of n equals k
+--Verify if the sum of digits of n equals k
 
 ex4r :: Int -> Int -> Int -> Bool
 ex4r 0 k sum= if k==sum then True else False
@@ -102,3 +98,8 @@ data Tree2 a = Empty | Branch a (Tree2 a) (Tree2 a) deriving Show
 preorder:: Tree2 Int-> [Int]
 preorder Empty = []
 preorder (Branch f ls rs) = f:preorder ls ++ preorder rs 
+
+-- List comprehesion
+
+ex3l :: Int -> [Int]
+ex3l n = [x|x<-[2..n], ex2r x (x-1)]

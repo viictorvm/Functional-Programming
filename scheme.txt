@@ -1,3 +1,5 @@
+
+;length of a list using letrec
 (define lengthLetrec
   (lambda(list)
     (letrec((lengthT0
@@ -9,8 +11,9 @@
                )
              ))
       (lengthT0 list 0))
-    ))   length of a list using letrec
+    ))   
 
+;same with let
 (define lengthLet
   (lambda(list)
     (let lengthLet((n list)(acc 0))
@@ -21,6 +24,7 @@
       ))
   )
 
+;intrersection of two lists using letrec
 (define intersectionLetrec
   (lambda(list1 list2)
     (letrec((intersection
@@ -38,6 +42,7 @@
     )
   )
 
+;same with let
 (define intersectionLet
   (lambda(list1 list2)
     (let intersectionLet((n1 list1)(n2 list2)(list3 '()))
